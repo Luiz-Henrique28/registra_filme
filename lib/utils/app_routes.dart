@@ -1,5 +1,3 @@
-
-
 class AppRoutes {
   static const String listaFilmes = '/';
   static const String cadastroFilme = '/cadastro';
