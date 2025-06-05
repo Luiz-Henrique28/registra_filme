@@ -1,15 +1,15 @@
 class Filme {
-  int? id;               
-  String imagemUrl;      
-  String titulo;         
-  String genero;         
-  String faixaEtaria;    
-  int duracao;           
-  double pontuacao;      
-  String descricao;      
-  int ano;               
+  int? id;
+  String imagemUrl;
+  String titulo;
+  String genero;
+  String faixaEtaria;
+  int duracao;
+  double pontuacao;
+  String descricao;
+  int ano;
 
-   Filme({
+  Filme({
     this.id,
     required this.imagemUrl,
     required this.titulo,
@@ -19,12 +19,15 @@ class Filme {
     required double pontuacao,
     required this.descricao,
     required this.ano,
-  })  : assert(pontuacao >= 0 && pontuacao <= 5, 'Pontuação deve estar entre 0 e 5'),
-        pontuacao = pontuacao.clamp(0.0, 5.0);
+  }) : assert(
+         pontuacao >= 0 && pontuacao <= 5,
+         'Pontuação deve estar entre 0 e 5',
+       ),
+       pontuacao = pontuacao.clamp(0.0, 5.0);
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,                     
+      'id': id,
       'imagemUrl': imagemUrl,
       'titulo': titulo,
       'genero': genero,
@@ -49,5 +52,4 @@ class Filme {
       ano: (map['ano'] as num).toInt(),
     );
   }
-
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'utils/app_routes.dart';
 import 'screens/lista_filmes_screen.dart';

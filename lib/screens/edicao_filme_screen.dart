@@ -1,4 +1,4 @@
-// lib/screens/edicao_filme_screen.dart
+//
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -15,7 +15,6 @@ class EdicaoFilmeScreen extends StatefulWidget {
 class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers para os TextFormField
   late TextEditingController _tituloController;
   late TextEditingController _generoController;
   late TextEditingController _duracaoController;
@@ -23,34 +22,30 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
   late TextEditingController _anoController;
   late TextEditingController _imagemUrlController;
 
-  // Variáveis para faixa etária e pontuação
   String? _faixaEtariaSelecionada;
   double _pontuacao = 0.0;
 
-  // Armazena o objeto Filme original (passado via argumentos)
   late Filme _filmeOriginal;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Recupera o objeto Filme passado via Navigator.pushNamed
+
     _filmeOriginal = ModalRoute.of(context)!.settings.arguments as Filme;
 
-    // Inicializa controladores com os valores atuais do filme
-    _tituloController =
-        TextEditingController(text: _filmeOriginal.titulo);
-    _generoController =
-        TextEditingController(text: _filmeOriginal.genero);
-    _duracaoController =
-        TextEditingController(text: _filmeOriginal.duracao.toString());
-    _descricaoController =
-        TextEditingController(text: _filmeOriginal.descricao);
-    _anoController =
-        TextEditingController(text: _filmeOriginal.ano.toString());
-    _imagemUrlController =
-        TextEditingController(text: _filmeOriginal.imagemUrl);
+    _tituloController = TextEditingController(text: _filmeOriginal.titulo);
+    _generoController = TextEditingController(text: _filmeOriginal.genero);
+    _duracaoController = TextEditingController(
+      text: _filmeOriginal.duracao.toString(),
+    );
+    _descricaoController = TextEditingController(
+      text: _filmeOriginal.descricao,
+    );
+    _anoController = TextEditingController(text: _filmeOriginal.ano.toString());
+    _imagemUrlController = TextEditingController(
+      text: _filmeOriginal.imagemUrl,
+    );
 
-    // Valores iniciais do dropdown e rating
     _faixaEtariaSelecionada = _filmeOriginal.faixaEtaria;
     _pontuacao = _filmeOriginal.pontuacao;
   }
@@ -66,7 +61,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
     super.dispose();
   }
 
-  /// Executa a atualização do filme no banco
   Future<void> _atualizarFilme() async {
     if (_formKey.currentState!.validate()) {
       final filmeAlterado = Filme(
@@ -90,16 +84,13 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Editar Filme'),
-      ),
+      appBar: AppBar(title: const Text('Editar Filme')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
-              // Campo: Título
               TextFormField(
                 controller: _tituloController,
                 decoration: const InputDecoration(labelText: 'Título'),
@@ -112,7 +103,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: Gênero
               TextFormField(
                 controller: _generoController,
                 decoration: const InputDecoration(labelText: 'Gênero'),
@@ -125,7 +115,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: Faixa Etária (Dropdown)
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(labelText: 'Faixa Etária'),
                 value: _faixaEtariaSelecionada,
@@ -151,7 +140,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: Duração (número)
               TextFormField(
                 controller: _duracaoController,
                 decoration: const InputDecoration(
@@ -172,7 +160,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: Pontuação (RatingBar interativo)
               const Text('Pontuação'),
               RatingBar.builder(
                 initialRating: _pontuacao,
@@ -181,15 +168,14 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemSize: 32.0,
-                itemBuilder: (context, _) =>
-                    const Icon(Icons.star, color: Colors.amber),
+                itemBuilder:
+                    (context, _) => const Icon(Icons.star, color: Colors.amber),
                 onRatingUpdate: (rating) {
                   _pontuacao = rating;
                 },
               ),
               const SizedBox(height: 12),
 
-              // Campo: Descrição (multilinha)
               TextFormField(
                 controller: _descricaoController,
                 decoration: const InputDecoration(labelText: 'Descrição'),
@@ -203,7 +189,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: Ano (número)
               TextFormField(
                 controller: _anoController,
                 decoration: const InputDecoration(
@@ -224,7 +209,6 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Campo: URL da Imagem
               TextFormField(
                 controller: _imagemUrlController,
                 decoration: const InputDecoration(
@@ -245,10 +229,9 @@ class _EdicaoFilmeScreenState extends State<EdicaoFilmeScreen> {
               ),
               const SizedBox(height: 24),
 
-              // Botão Atualizar
               ElevatedButton(
                 onPressed: _atualizarFilme,
-                child: const Text('Atualizar')
+                child: const Text('Atualizar'),
               ),
             ],
           ),
